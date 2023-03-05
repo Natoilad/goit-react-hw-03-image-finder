@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 export const ImageGalleryItem = ({ images, togleModal }) => {
   return images.map(img => {
     const { id, webformatURL, tags } = img;
@@ -18,4 +19,9 @@ export const ImageGalleryItem = ({ images, togleModal }) => {
       </li>
     );
   });
+};
+
+ImageGalleryItem.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  togleModal: PropTypes.func.isRequired,
 };

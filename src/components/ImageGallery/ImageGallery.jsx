@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
 export const ImageGallery = ({ images, togleModal }) => {
@@ -6,4 +7,9 @@ export const ImageGallery = ({ images, togleModal }) => {
       <ImageGalleryItem togleModal={togleModal} images={images} />
     </ul>
   );
+};
+
+ImageGallery.propTypes = {
+  togleModal: PropTypes.func.isRequired,
+  images: PropTypes.shape(PropTypes.object).isRequired,
 };
