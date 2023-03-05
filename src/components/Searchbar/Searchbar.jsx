@@ -13,7 +13,7 @@ export class Searchbar extends Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            this.props.onSubmit(this.state.value);
+            this.props.onSubmit(this.state.value.trim());
             this.setState({ value: '' });
           }}
           className={css.SearchForm}

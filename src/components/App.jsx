@@ -15,6 +15,7 @@ export class App extends Component {
     toggleModal: false,
     total: 1,
     isVisibleBtn: false,
+    empty: false,
   };
   onSubmit = text => {
     this.setState({
@@ -47,7 +48,7 @@ export class App extends Component {
     try {
       const { hits, totalHits } = await getImages(search, page);
       if (hits.length === 0) {
-        // this.setState({ empty: true });
+        this.setState({ empty: true });
       }
       this.setState(prevState => ({
         images: [...prevState.images, ...hits],
@@ -77,6 +78,12 @@ export class App extends Component {
         )}
 
         {this.state.isVisibleBtn && <Button onLoadMore={this.onLoadMore} />}
+        {this.state.error && (
+          <h1 textAlign="center">Sorry. Something goes wrong 😭</h1>
+        )}
+        {this.state.empty && (
+          <h1 textAlign="center">Sorry. There are no images ... 😭</h1>
+        )}
       </div>
     );
   }
