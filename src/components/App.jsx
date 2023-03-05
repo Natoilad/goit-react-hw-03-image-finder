@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { getImages } from 'Service/service';
 import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { Loader } from './Loader/Loader';
 import { Searchbar } from './Searchbar/Searchbar';
-// import * as fetchSevice from 'Service/service';
 
 export class App extends Component {
   state = {
@@ -63,9 +63,19 @@ export class App extends Component {
   };
   render() {
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery images={this.state.images} />
+        {this.state.loading && (
+          <Loader
+            style={{
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              display: 'block',
+            }}
+          />
+        )}
+
         {this.state.isVisibleBtn && <Button onLoadMore={this.onLoadMore} />}
       </div>
     );
