@@ -1,9 +1,9 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
-export const ImageGallery = ({ images }) => {
+export const ImageGallery = ({ images, togleModal }) => {
   return (
     <ul className="ImageGallery">
-      <ImageGalleryItem images={images} />
+      <ImageGalleryItem togleModal={togleModal} images={images} />
     </ul>
   );
 };

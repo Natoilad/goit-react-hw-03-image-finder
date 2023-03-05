@@ -2,18 +2,19 @@ import { Component } from 'react';
 
 export class Modal extends Component {
   componentDidMount() {
-    window.addEventListener('escapeKey', this.escapeKey);
+    window.addEventListener('keydown', this.escapeKey);
   }
-
-  componentWillUnmount() {
-    window.removeEventListener('escapeKey', this.escapeKey);
-  }
-
   escapeKey = evt => {
     if (evt.code === 'Escape') {
+      console.log('press esc');
       this.props.closeModal();
     }
   };
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.escapeKey);
+  }
+
   backDropClick = evt => {
     if (evt.currentTarget === evt.target) {
       this.props.closeModal();

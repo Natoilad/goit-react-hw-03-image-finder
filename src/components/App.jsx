@@ -3,6 +3,7 @@ import { getImages } from 'Service/service';
 import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
+import { Modal } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 
 export class App extends Component {
@@ -12,7 +13,7 @@ export class App extends Component {
     page: 1,
     loading: false,
     error: null,
-    toggleModal: false,
+    showModal: false,
     total: 1,
     isVisibleBtn: false,
     empty: false,
@@ -62,11 +63,34 @@ export class App extends Component {
       this.setState({ loading: false });
     }
   };
+  openModal = (largeImageURL, alt) => {
+    this.setState(({ showModal }) => {
+      return { showModal: !showModal, largeImageURL, alt };
+    });
+  };
+
+  handleSubmit = search => {
+    this.setState({
+      search,
+      images: [],
+      page: 1,
+      total: 1,
+      loading: false,
+      error: null,
+    });
+  };
+
+  closeModal = () => {
+    this.setState(({ showModal }) => {
+      return { showModal: !showModal };
+    });
+  };
+
   render() {
     return (
       <div style={{ textAlign: 'center' }}>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery images={this.state.images} />
+        <ImageGallery togleModal={this.openModal} images={this.state.images} />
         {this.state.loading && (
           <Loader
             style={{
@@ -83,6 +107,11 @@ export class App extends Component {
         )}
         {this.state.empty && (
           <h1 textAlign="center">Sorry. There are no images ... 😭</h1>
+        )}
+        {this.state.showModal && (
+          <Modal closeModal={this.closeModal}>
+            <img src={this.state.largeImageURL} alt={this.state.alt} />
+          </Modal>
         )}
       </div>
     );
